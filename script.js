@@ -1,14 +1,16 @@
 const grid = document.getElementById('grid');
 const scoreDisplay = document.querySelector('#score span');
+const bestScoreDisplay = document.querySelector('#best-score span');
 const newGameButton = document.getElementById('new-game');
 
 let board = [];
 let score = 0;
+let bestScore = 0;
 
 function initializeGame() {
     board = Array(4).fill().map(() => Array(4).fill(0));
     score = 0;
-    scoreDisplay.textContent = score;
+    updateScore();
     addNewTile();
     addNewTile();
     updateGrid();
@@ -38,6 +40,7 @@ function updateGrid() {
             cell.textContent = board[i][j] || '';
             if (board[i][j] > 0) {
                 cell.style.backgroundColor = getTileColor(board[i][j]);
+                cell.style.color = board[i][j] <= 4 ? '#776e65' : '#f9f6f2';
             }
             grid.appendChild(cell);
         }
@@ -108,11 +111,33 @@ function move(direction) {
         board = newBoard;
         addNewTile();
         updateGrid();
-        scoreDisplay.textContent = score;
-        if (isGameOver()) {
+        updateScore();
+        if (isGameWon()) {
+            alert('Congratulations! You won!');
+        } else if (isGameOver()) {
             alert('Game Over!');
         }
     }
+}
+
+function updateScore() {
+    scoreDisplay.textContent = score;
+    if (score > bestScore) {
+        bestScore = score;
+        bestScoreDisplay.textContent = bestScore;
+        localStorage.setItem('bestScore', bestScore);
+    }
+}
+
+function isGameWon() {
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            if (board[i][j] === 2048) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 function isGameOver() {
@@ -140,5 +165,31 @@ document.addEventListener('keydown', (e) => {
 });
 
 newGameButton.addEventListener('click', initializeGame);
+
+// Touch events for mobile devices
+let touchStartX, touchStartY;
+document.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+});
+
+document.addEventListener('touchend', (e) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const touchEndY = e.changedTouches[0].clientY;
+    const dx = touchEndX - touchStartX;
+    const dy = touchEndY - touchStartY;
+
+    if (Math.abs(dx) > Math.abs(dy)) {
+        if (dx > 0) move('right');
+        else move('left');
+    } else {
+        if (dy > 0) move('down');
+        else move('up');
+    }
+});
+
+// Load best score from local storage
+bestScore = parseInt(localStorage.getItem('bestScore')) || 0;
+bestScoreDisplay.textContent = bestScore;
 
 initializeGame();

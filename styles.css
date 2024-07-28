@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,11 +15,21 @@ body {
 h1 {
     font-size: 48px;
     margin-bottom: 20px;
+    color: #776e65;
 }
 
-#score {
-    font-size: 24px;
+.score-container {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
+}
+
+#score, #best-score {
+    font-size: 24px;
+    background-color: #bbada0;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
 }
 
 #grid {
@@ -40,6 +50,7 @@ h1 {
     font-size: 36px;
     font-weight: bold;
     border-radius: 5px;
+    transition: all 0.1s ease-in-out;
 }
 
 button {
@@ -47,4 +58,25 @@ button {
     font-size: 18px;
     padding: 10px 20px;
     cursor: pointer;
+    background-color: #8f7a66;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #9f8b77;
+}
+
+@media (max-width: 480px) {
+    #grid {
+        grid-template-columns: repeat(4, 70px);
+        grid-template-rows: repeat(4, 70px);
+        gap: 5px;
+    }
+
+    .cell {
+        font-size: 24px;
+    }
 }

@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2048 Game</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <h1>2048</h1>
-        <div id="score">Score: <span>0</span></div>
+        <div class="score-container">
+            <div id="score">Score: <span>0</span></div>
+            <div id="best-score">Best: <span>0</span></div>
+        </div>
         <div id="grid">
             <!-- Grid cells will be dynamically added here -->
         </div>
