@@ -1,11 +1,20 @@
+:root {
+    --bg-color: #faf8ef;
+    --text-color: #776e65;
+    --grid-color: #bbada0;
+    --tile-color: #cdc1b4;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
-    background-color: #faf8ef;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -15,48 +24,36 @@ body {
 h1 {
     font-size: 48px;
     margin-bottom: 20px;
-    color: #776e65;
+}
+
+.control-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .score-container {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    gap: 20px;
 }
 
 #score, #best-score {
-    font-size: 24px;
-    background-color: #bbada0;
+    font-size: 20px;
+    background-color: var(--grid-color);
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
 }
 
-#grid {
-    display: grid;
-    grid-template-columns: repeat(4, 100px);
-    grid-template-rows: repeat(4, 100px);
-    gap: 10px;
-    background-color: #bbada0;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.cell {
-    background-color: #cdc1b4;
+.buttons {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 36px;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: all 0.1s ease-in-out;
+    gap: 10px;
 }
 
 button {
-    margin-top: 20px;
-    font-size: 18px;
-    padding: 10px 20px;
+    font-size: 16px;
+    padding: 10px 15px;
     cursor: pointer;
     background-color: #8f7a66;
     color: white;
@@ -69,14 +66,46 @@ button:hover {
     background-color: #9f8b77;
 }
 
+.settings {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#grid {
+    display: grid;
+    gap: 10px;
+    background-color: var(--grid-color);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.cell {
+    background-color: var(--tile-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: all 0.1s ease-in-out;
+}
+
 @media (max-width: 480px) {
-    #grid {
-        grid-template-columns: repeat(4, 70px);
-        grid-template-rows: repeat(4, 70px);
-        gap: 5px;
+    .control-panel {
+        flex-direction: column;
+        gap: 10px;
     }
 
     .cell {
         font-size: 24px;
     }
+}
+
+/* Dark theme */
+body.dark-theme {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --grid-color: #333333;
+    --tile-color: #424242;
 }

@@ -9,15 +9,27 @@
 </head>
 <body>
     <div class="container">
-        <h1>2048</h1>
-        <div class="score-container">
-            <div id="score">Score: <span>0</span></div>
-            <div id="best-score">Best: <span>0</span></div>
+        <h1>2048 Game</h1>
+        <div class="control-panel">
+            <div class="score-container">
+                <div id="score">Score: <span>0</span></div>
+                <div id="best-score">Best: <span>0</span></div>
+            </div>
+            <div class="buttons">
+                <button id="new-game">New Game</button>
+                <button id="undo">Undo</button>
+                <button id="theme-toggle">Toggle Theme</button>
+            </div>
+            <div class="settings">
+                <label for="grid-size">Grid Size:</label>
+                <select id="grid-size">
+                    <option value="4">4x4</option>
+                    <option value="5">5x5</option>
+                    <option value="6">6x6</option>
+                </select>
+            </div>
         </div>
-        <div id="grid">
-            <!-- Grid cells will be dynamically added here -->
-        </div>
-        <button id="new-game">New Game</button>
+        <div id="grid"></div>
     </div>
     <script src="script.js"></script>
 </body>
